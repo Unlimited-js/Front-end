@@ -7,6 +7,9 @@ import Providers from 'src/providers';
 import Header from '@components/header';
 import {  useContext } from 'react';
 import { ThemeContext } from 'src/context/theme';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
 
 enum Theme {
   dark="dark",
@@ -33,6 +36,7 @@ function App({ Component, pageProps }: AppProps) {
       {mounted && 
       <div>
         <Header />
+        <ToastContainer />
         <Component {...pageProps} />
         </div>}
       </ConnectKitProvider>  

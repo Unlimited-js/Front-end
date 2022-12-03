@@ -1,0 +1,4 @@
+
+
+export const betTokenAddress="0x5AB4c09A339C9139B28D6bfE168e45682391F307"
+export  const betGGameAddress="0x72ae57647e94B4bdf4EC8ae4E7E9D5A71216172D"

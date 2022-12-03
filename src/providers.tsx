@@ -12,10 +12,8 @@ import {useTheme} from "next-themes"
 
 
 function Providers({ children}:any) {
-    const theme = useTheme()
-  
-    console.log(theme)
-
+    const theme = useTheme()  
+   
 
   return (
     <ThemeProvider attribute="class" enableSystem={false} >

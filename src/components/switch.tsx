@@ -2,7 +2,14 @@ import { useContext, useEffect, useState } from 'react'
 import { useTheme } from 'next-themes'
 import { ThemeContext } from 'src/context/theme'
 
+
+function useForceUpdate(){
+    const [value, setValue] = useState(0); // integer state
+    return () => setValue(value => value + 1); // update the state to force render
+}
+
 const ThemeSwitch = () => {
+    const forceUpdate = useForceUpdate();
     const [ theme, setTheme, resolvedTheme] = useContext(ThemeContext)
     const [mounted, setMounted] = useState(false)
 // const { theme, setTheme, resolvedTheme} = useTheme()

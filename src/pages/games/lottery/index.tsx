@@ -7,7 +7,7 @@ import usePlay from "./hooks/usePlay"
 import useToast from "src/hook/useToast"
 import useBetStarted from "./hooks/useBetStarted"
 import useBetEnded from "./hooks/useBetEnded"
-import useApprove from "src/pages/games/lottery/hooks/useApprove"
+import useApprove from "src/hook/useApprove"
 import useTimeLeft from "./hooks/useTimeLeft"
 
 

@@ -1,12 +1,13 @@
 import React, {  useState, useEffect } from "react"
 import useAllowance from "src/hook/useAllowance"
+import useApprove from "src/hook/useApprove"
 import useBalance from "src/hook/useBalance"
-// import useBetPrice from "./hooks/useBetPrice"
 import ButtonActions from "@components/commons/buttonActions"
 import usePlay from "./hooks/usePlay"
 import useToast from "src/hook/useToast"
 import useSpinnerDetails from "./hooks/useSpinnerDetails"
-import { currentSpinnerId } from "src/config"
+import { currentSpinnerId, spinnerAddress } from "src/config"
+import Image from "next/image"
 
 
 
@@ -14,6 +15,8 @@ import { currentSpinnerId } from "src/config"
 const Spinner = ()=>{
     const [userNum, setUserNum] = useState(0)
     const {data:balance} = useBalance()
+    const {data:allowance, refetch} = useAllowance(spinnerAddress)
+    const {writeAsync:approveFunc=()=>{}, isWaiting, isLoading:isApproving } = useApprove(spinnerAddress)
     const data = useSpinnerDetails(1) as any
     console.log(data, "spinner data")
     const resoluteData = {
@@ -62,8 +65,7 @@ const Spinner = ()=>{
     }
 
     const _betStatusRender = ()=>{
-    //  if(inProgress) return "In Pro"
-
+    //  if(inProgress) return "In Progress"
     //  if(betEnded) return 'bet Ended'
     //  return "bet not started"
     }
@@ -74,32 +76,31 @@ const Spinner = ()=>{
                 {/* {_betStatusRender()} */}
               </div>
               </div>
-            <form onSubmit={submitData}>
-            <input 
-            type="number"
-            onChange={handleChange}
-            placeholder="pick a number 1 to 10 " className="p-2 border" />
+             
+              <div className="h-80 w-80  relative ">    
+        <Image      
+        src="/spinner.jpeg"
+         width="600" height="500"
+          alt="spinner"
+         />
+          
+    </div>
 
-<div className="flex justify-center mt-4">             
-                {/* <ButtonActions
+            <form onSubmit={submitData}>          
+          <div className="flex justify-center mt-4">             
+                <ButtonActions
+                actionText="Spin"
                 approveFunc={approveFunc}
                 isApproving={isApproving}                                
-                 crud={disabledBtn || !!betEnded || !!!betStarted ||  isLoading || isWaiting 
+                 crud={disabledBtn || isLoading || isWaiting
                 } 
                  price={resoluteData?.entryPrice} 
                  allowance={allowance}
                  refetch={refetch}
                 balance={balance} 
-                />                         */}
-            </div>
-            
-            <div className="flex justify-center mt-4">             
-                {/* <ButtonActions
-                 crud={disabledBtn || !!betEnded || !!!betStarted ||  isLoading} 
-                 price={price} 
-                balance={balance} 
-                />                         */}
-            </div>
+                />                        
+            </div>         
+         
             </form>        
    
     </div>)

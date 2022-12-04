@@ -9,9 +9,10 @@ interface ITransactionDetails {
      refetch:()=>void
      approveFunc:()=>any
      isApproving:boolean
+     actionText:string
 
 }
-const ButtonActions = ({price, balance, crud=false, allowance, refetch, approveFunc, isApproving}:ITransactionDetails)=>{   
+const ButtonActions = ({price, balance, crud=false, allowance, refetch, approveFunc, isApproving, actionText="Play"}:ITransactionDetails)=>{   
     
   
     const approveTransaction =async ()=>{
@@ -39,7 +40,7 @@ const ButtonActions = ({price, balance, crud=false, allowance, refetch, approveF
         }
 
         return   <Button disabled={crud} type="submit">
-        Play
+        {actionText}
     </Button>   
     }   
     return <div>

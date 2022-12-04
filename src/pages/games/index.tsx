@@ -40,7 +40,7 @@ const Games =()=>{
           alt="spinner"/>
           <div className="absolute bottom-4">
           <Button>
-            <Link href="/games/lotteryg">
+            <Link href="/games/lottery">
             Lottery
             </Link>
          </Button> 

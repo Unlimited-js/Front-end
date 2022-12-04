@@ -2,11 +2,11 @@ import {ethers} from "ethers"
 import { betGGameAddress, betTokenConfig } from "src/config"
 import useWrite from "src/hook/useWrite"
 
-const  useApprove = ()=>{
+const  useApprove = (spenderAddress=betGGameAddress)=>{
     const amount =  ethers.utils.parseEther("10000000");
     const data = useWrite({
         ...betTokenConfig,    
-        args:[betGGameAddress,amount],
+        args:[spenderAddress, amount],
         functionName:"approve",
        
     })

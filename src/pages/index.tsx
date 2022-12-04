@@ -1,6 +1,3 @@
-import { useAccount } from 'wagmi'
-
-import { Account, Connect, } from '../components'
 
 function Page() {
 

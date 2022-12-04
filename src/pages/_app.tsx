@@ -1,5 +1,6 @@
 import type { AppProps } from 'next/app'
 import NextHead from 'next/head'
+import 'react-toastify/dist/ReactToastify.css';
 import '../../styles/globals.css'
 import * as React from 'react'
 import { ConnectKitProvider } from "connectkit";
@@ -8,7 +9,10 @@ import Header from '@components/header';
 import {  useContext } from 'react';
 import { ThemeContext } from 'src/context/theme';
 import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import TimeAgo from 'javascript-time-ago'
+import en from "javascript-time-ago/locale/en.json";
+TimeAgo.addLocale(en);
+
 
 
 enum Theme {

@@ -3,39 +3,35 @@ import useAllowance from "src/hook/useAllowance"
 import useBalance from "src/hook/useBalance"
 // import useBetPrice from "./hooks/useBetPrice"
 import ButtonActions from "@components/commons/buttonActions"
-// import usePlay from "./hooks/usePlay"
+import usePlay from "./hooks/usePlay"
 import useToast from "src/hook/useToast"
 import useSpinnerDetails from "./hooks/useSpinnerDetails"
-// import useBetStarted from "./hooks/useBetStarted"
-// import useBetEnded from "./hooks/useBetEnded"
+import { currentSpinnerId } from "src/config"
 
 
 
-const Bet = ()=>{
+
+const Spinner = ()=>{
     const [userNum, setUserNum] = useState(0)
     const {data:balance} = useBalance()
     const data = useSpinnerDetails(1) as any
-    const typeOfData = typeof data
+    console.log(data, "spinner data")
     const resoluteData = {
-        entryPrice:data?.[0],
-        claimDeadline:data?.[1].toString() ? new Date(+data?.[1].toString()*1000) : '',
-        created:data?.[2],
-        currentHighestNumber:data?.[3],
-        price:data[4].toString() ?? 0,
+        currentHighestNumber:data?.["currentHighestNumber"],
+        winner:data?.["winner"],
+        entryPrice:data?.["EntryPrice"],
+        created:data?.["created"],
+        spinId:data?.["spinId"],
+        deadline:data?.["deadline"],
+        prizeClaimed:data?.["prizeClaimed"],
+        claimDeadline:data?.["claimDeadline"] ? +data?.["claimDeadline"].toString(): "",
+        prize:data?.["prize"] ? +data?.["prize"].toString()/10**18: 0,
 
-
-
-
-
-
-    } as typeof data
+   } 
     console.log(data, "spiner details")
     console.log(resoluteData, "sresolute data")
     // const {data:price } = useBetPrice()  
-//    const { writeAsync,isLoading} = usePlay(userNum) 
-//    const {data: betStarted} = useBetStarted()  
-//    const {data:betEnded} = useBetEnded()
-//    const inProgress = betStarted && !betEnded
+   const { writeAsync,isLoading} = usePlay(currentSpinnerId) 
 
    const toastContent = useToast()
    const [disabledBtn, setDisabledBtn] = useState(true)
@@ -83,6 +79,20 @@ const Bet = ()=>{
             type="number"
             onChange={handleChange}
             placeholder="pick a number 1 to 10 " className="p-2 border" />
+
+<div className="flex justify-center mt-4">             
+                {/* <ButtonActions
+                approveFunc={approveFunc}
+                isApproving={isApproving}                                
+                 crud={disabledBtn || !!betEnded || !!!betStarted ||  isLoading || isWaiting 
+                } 
+                 price={resoluteData?.entryPrice} 
+                 allowance={allowance}
+                 refetch={refetch}
+                balance={balance} 
+                />                         */}
+            </div>
+            
             <div className="flex justify-center mt-4">             
                 {/* <ButtonActions
                  crud={disabledBtn || !!betEnded || !!!betStarted ||  isLoading} 
@@ -95,4 +105,4 @@ const Bet = ()=>{
     </div>)
 }
 
-export default Bet
+export default Spinner

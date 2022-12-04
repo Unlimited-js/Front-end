@@ -1,24 +1,24 @@
 import {  toast } from 'react-toastify';
-import useApprove from "src/pages/games/hooks/useApprove"
 import Button from "./button"
-
-
 
 interface ITransactionDetails {
      balance:string | number
      allowance:string | number
      price:string | number
      crud?:boolean
+     refetch:()=>void
+     approveFunc:()=>any
+     isApproving:boolean
+
 }
-const ButtonActions = ({price, balance, allowance, crud=false}:ITransactionDetails)=>{
- 
-    const { isLoading, writeAsync} = useApprove()
+const ButtonActions = ({price, balance, crud=false, allowance, refetch, approveFunc, isApproving}:ITransactionDetails)=>{   
+    
   
     const approveTransaction =async ()=>{
         try{
 
-          const res =  await writeAsync?.()
-        //   console.log(res)        
+         await approveFunc?.()      
+        refetch?.()     
 
         }
         catch(e:any) {
@@ -27,13 +27,14 @@ const ButtonActions = ({price, balance, allowance, crud=false}:ITransactionDetai
          
         }
     }
+    
     const _render = ()=>{
              if(balance < price){
             return <Button type="button"> Insufficient Balance</Button>
         }
         if(allowance < price){
-            return <Button disabled={isLoading} type="button" onClick={approveTransaction }>
-                {isLoading ? "Approving": "Approve"}
+            return <Button disabled={isApproving} type="button" onClick={approveTransaction }>
+                {isApproving ? "Approving": "Approve"}
             </Button>
         }
 

@@ -12,7 +12,7 @@ const Header = ()=>{
                 Games
             </Link>
             </div>
-            <ThemeSwitch />
+            {/* <ThemeSwitch /> */}
            
             <Connect />
         </div>

@@ -1,4 +1,3 @@
-import {toast} from 'react-toastify'
 import { useEffect } from 'react';
 import {
     usePrepareContractWrite,
@@ -51,7 +50,7 @@ const useWrite = (arg:Iarg)=>{
     //   @ts-ignore 
       const { write, error, data, isLoading, isSuccess, reset , writeAsync} =  useContractWrite(config);
 
-      const { data: writeConfirmation } = useWaitForTransaction({
+      const { data: writeConfirmation, isLoading:isWaiting } = useWaitForTransaction({
         hash: data?.hash,
       });
   
@@ -65,7 +64,7 @@ useEffect(()=>{
   }
 
   if(txn){
-    toastContent("Trnsaction confirmed",data?.hash, "success" )
+    toastContent("Transaction confirmed",data?.hash, "success" )
   }
 },[txn, isSuccess])
       return {
@@ -77,6 +76,7 @@ useEffect(()=>{
         isSuccessSubmitted: isSuccess,
         writeConfirmation,
         reset,
+        isWaiting
       };
 }
 

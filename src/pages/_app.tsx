@@ -32,7 +32,7 @@ function App({ Component, pageProps }: AppProps) {
       <NextHead>
         <title>Unlimited</title>
       </NextHead>
-      <ConnectKitProvider  mode={theme ? Theme.dark :Theme.light}>
+      <ConnectKitProvider  mode="dark">
       {mounted && 
       <div>
         <Header />

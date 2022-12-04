@@ -3,13 +3,13 @@ import { useAccount } from "wagmi"
 import betTokenAbi from "../config/abi/betTokenAbi.json"
 import useRead from "./useRead"
 
-const useAllowance = ()=>{
+const useAllowance = (spender:string= betGGameAddress)=>{
     const {address} = useAccount()
     const {data, ...props} = useRead({     
         address: betTokenAddress,
         abi: betTokenAbi,
         functionName: 'allowance',
-        args:[address,  betGGameAddress]
+        args:[address,  spender]
     })
 
     return {
